@@ -2,8 +2,8 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://api.unsplash.com";
 
-export const fetchData = async (searchValue, currentPage = 1) => {
-  const apiKey = "VQppnVD__ZqJ2MeulwdzyzELoxQwPG0U7FUetz13Jm3k"; 
+export const fetchData = async (searchValue, currentPage) => {
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   try {
     const response = await axios.get("/search/photos", {
@@ -17,11 +17,9 @@ export const fetchData = async (searchValue, currentPage = 1) => {
       },
     });
 
-    return response.data;
+    return response;
   } catch (error) {
-    console.error("Fetch error:", error);
+    console.error("Fetch error:", error.message);
     throw error;
   }
 };
-
-
